@@ -1,0 +1,15 @@
+{
+  "name": "r9-understrap-child",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "autoprefixer": "^9.6.0",
+    "bootstrap": "^4.3.1",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.12.0"
+  }
+}
