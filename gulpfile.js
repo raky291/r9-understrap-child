@@ -3,6 +3,8 @@ const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 
 // ----------------------------------------------------------------------------
 // Configuration
@@ -16,6 +18,12 @@ const config = {
         postcss: [autoprefixer({ cascade: false }), cssnano()],
         dest: 'assets/dist/css'
     },
+    scripts: {
+        src: 'assets/src/js/**/*.js',
+        watch: 'assets/src/js/**/*.js',
+        babel: { presets: ['@babel/preset-env'] },
+        dest: 'assets/dist/js'
+    },
     fonts: {
         src: 'node_modules/@fortawesome/fontawesome-free/webfonts/*.{eot,svg,ttf,woff,woff2}',
         dest: 'assets/dist/fonts'
@@ -26,7 +34,7 @@ const config = {
 // Debug
 // ----------------------------------------------------------------------------
 
-const debug = gulp.parallel(debugStyles);
+const debug = gulp.parallel(debugStyles, debugScripts);
 
 function debugStyles() {
     return gulp
@@ -36,11 +44,18 @@ function debugStyles() {
         .pipe(gulp.dest(config.styles.dest, { sourcemaps: true }));
 }
 
+function debugScripts() {
+    return gulp
+        .src(config.scripts.src, { sourcemaps: true })
+        .pipe(babel(config.scripts.babel))
+        .pipe(gulp.dest(config.scripts.dest, { sourcemaps: true }));
+}
+
 // ----------------------------------------------------------------------------
 // Release
 // ----------------------------------------------------------------------------
 
-const release = gulp.parallel(releaseStyles);
+const release = gulp.parallel(releaseStyles, releaseScripts);
 
 function releaseStyles() {
     return gulp
@@ -50,12 +65,21 @@ function releaseStyles() {
         .pipe(gulp.dest(config.styles.dest));
 }
 
+function releaseScripts() {
+    return gulp
+        .src(config.scripts.src)
+        .pipe(babel(config.scripts.babel))
+        .pipe(uglify())
+        .pipe(gulp.dest(config.scripts.dest));
+}
+
 // ----------------------------------------------------------------------------
 // Watch
 // ----------------------------------------------------------------------------
 
 function watch() {
     gulp.watch(config.styles.watch, debugStyles);
+    gulp.watch(config.scripts.watch, debugScripts);
 }
 
 // ----------------------------------------------------------------------------
