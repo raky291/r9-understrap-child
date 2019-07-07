@@ -5,6 +5,8 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
+const del = require('del');
 
 // ----------------------------------------------------------------------------
 // Configuration
@@ -22,6 +24,14 @@ const config = {
         src: 'assets/src/js/**/*.js',
         watch: 'assets/src/js/**/*.js',
         babel: { presets: ['@babel/preset-env'] },
+        dest: 'assets/dist/js'
+    },
+    clean: {
+        dir: 'assets/dist/**'
+    },
+    vendors: {
+        src: ['node_modules/bootstrap/dist/js/bootstrap.bundle.js'],
+        concat: 'child-theme.vendors.js',
         dest: 'assets/dist/js'
     },
     fonts: {
@@ -55,7 +65,7 @@ function debugScripts() {
 // Release
 // ----------------------------------------------------------------------------
 
-const release = gulp.parallel(releaseStyles, releaseScripts);
+const release = gulp.series(clean, gulp.parallel(releaseStyles, releaseScripts, vendors, fonts));
 
 function releaseStyles() {
     return gulp
@@ -83,10 +93,22 @@ function watch() {
 }
 
 // ----------------------------------------------------------------------------
-// Copy Fonts
+// Clean, Vendors and Fonts
 // ----------------------------------------------------------------------------
 
-function copyFonts() {
+function clean() {
+    return del(config.clean.dir);
+}
+
+function vendors() {
+    return gulp
+        .src(config.vendors.src)
+        .pipe(concat(config.vendors.concat))
+        .pipe(uglify())
+        .pipe(gulp.dest(config.vendors.dest));
+}
+
+function fonts() {
     return gulp.src(config.fonts.src).pipe(gulp.dest(config.fonts.dest));
 }
 
@@ -97,4 +119,4 @@ function copyFonts() {
 exports.debug = debug;
 exports.release = release;
 exports.watch = watch;
-exports.copyFonts = copyFonts;
+exports.default = release;
