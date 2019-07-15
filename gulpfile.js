@@ -11,7 +11,7 @@ const config = require('./gulp.config');
 // Debug
 // ----------------------------------------------------------------------------
 
-const debug = gulp.parallel(debugStyles, debugScripts);
+const debug = gulp.series(clean, gulp.parallel(debugStyles, debugScripts, vendors, fonts));
 
 function debugStyles() {
     return gulp
@@ -56,7 +56,7 @@ function releaseScripts() {
 
 function watch() {
     gulp.watch(config.styles.watch, debugStyles);
-    gulp.watch(config.scripts.watch, debugScripts);
+    gulp.watch(config.scripts.src, debugScripts);
 }
 
 // ----------------------------------------------------------------------------
