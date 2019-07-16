@@ -14,7 +14,6 @@ class R9_Understrap
     public function add_scripts()
     {
         $this->r9_enqueue_style('r9-understrap-styles', '/assets/dist/css/child-theme.css');
-
         $this->r9_enqueue_script('r9-understrap-vendors', '/assets/dist/js/child-theme.vendors.js', array('jquery'));
     }
 
@@ -22,7 +21,6 @@ class R9_Understrap
     {
         wp_dequeue_style('understrap-styles');
         wp_deregister_style('understrap-styles');
-
         wp_dequeue_script('understrap-scripts');
         wp_deregister_script('understrap-scripts');
     }
