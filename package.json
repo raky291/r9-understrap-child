@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
-    "@fortawesome/fontawesome-free": "^5.9.0",
-    "autoprefixer": "^9.6.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "autoprefixer": "^9.6.1",
     "bootstrap": "^4.3.1",
     "cssnano": "^4.1.10",
     "del": "^5.0.0",
@@ -16,6 +16,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
+    "merge-stream": "^2.0.0",
     "node-sass": "^4.12.0",
     "webfontloader": "^1.6.28"
   }
