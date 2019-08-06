@@ -6,6 +6,7 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const del = require('del');
 const merge = require('merge-stream');
+const through = require('through2');
 const config = require('./gulp.config');
 
 // ----------------------------------------------------------------------------
@@ -30,14 +31,13 @@ function debugStyles() {
 
 function debugScripts() {
     return merge(
-        gulp
-            .src(config.scripts.main.src, { sourcemaps: true })
-            .pipe(concat(config.scripts.main.concat))
-            .pipe(gulp.dest(config.scripts.dest, { sourcemaps: true })),
-        gulp
-            .src(config.scripts.babel.src, { sourcemaps: true })
-            .pipe(babel())
-            .pipe(gulp.dest(config.scripts.dest, { sourcemaps: true }))
+        config.scripts.map(script => {
+            return gulp
+                .src(script.src, { sourcemaps: true })
+                .pipe(babel())
+                .pipe($if(script.concat, () => concat(script.concat)))
+                .pipe(gulp.dest(script.dest, { sourcemaps: true }));
+        })
     );
 }
 
@@ -57,16 +57,14 @@ function releaseStyles() {
 
 function releaseScripts() {
     return merge(
-        gulp
-            .src(config.scripts.main.src)
-            .pipe(concat(config.scripts.main.concat))
-            .pipe(uglify())
-            .pipe(gulp.dest(config.scripts.dest)),
-        gulp
-            .src(config.scripts.babel.src)
-            .pipe(babel())
-            .pipe(uglify())
-            .pipe(gulp.dest(config.scripts.dest))
+        config.scripts.map(script => {
+            return gulp
+                .src(script.src)
+                .pipe(babel())
+                .pipe($if(script.concat, () => concat(script.concat)))
+                .pipe(uglify())
+                .pipe(gulp.dest(script.dest));
+        })
     );
 }
 
@@ -76,7 +74,7 @@ function releaseScripts() {
 
 function watch() {
     gulp.watch(config.styles.watch, debugStyles);
-    gulp.watch(config.scripts.watch, debugScripts);
+    config.scripts.forEach(script => gulp.watch(script.src, debugScripts));
 }
 
 // ----------------------------------------------------------------------------
@@ -85,6 +83,14 @@ function watch() {
 
 function fonts() {
     return gulp.src(config.fonts.src).pipe(gulp.dest(config.fonts.dest));
+}
+
+// ----------------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------------
+
+function $if(condition, callback) {
+    return condition ? callback() : through.obj();
 }
 
 // ----------------------------------------------------------------------------

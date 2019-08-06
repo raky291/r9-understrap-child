@@ -10,21 +10,21 @@ module.exports = {
         },
         dest: 'assets/dist/css'
     },
-    scripts: {
-        main: {
+    scripts: [
+        {
             src: [
                 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
                 'node_modules/webfontloader/webfontloader.js',
                 'assets/src/js/main/*.js'
             ],
-            concat: 'child-theme.js'
+            concat: 'child-theme.js',
+            dest: 'assets/dist/js'
         },
-        babel: {
-            src: 'assets/src/js/pages/*.js'
-        },
-        watch: 'assets/src/js/**/*.js',
-        dest: 'assets/dist/js'
-    },
+        {
+            src: 'assets/src/js/pages/*.js',
+            dest: 'assets/dist/js'
+        }
+    ],
     fonts: {
         src: 'node_modules/@fortawesome/fontawesome-free/webfonts/*.{eot,svg,ttf,woff,woff2}',
         dest: 'assets/dist/fonts'
