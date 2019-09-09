@@ -6,4 +6,4 @@ node_modules/
 package-lock.json
 
 # Distribution directory
-assets/dist/
+wwwroot/dist/
