@@ -6,9 +6,15 @@ class R9_Understrap
 {
     public function __construct()
     {
+        remove_filter('the_content', 'wpautop');
+        remove_filter('the_excerpt', 'wpautop');
+
         add_action('wp_enqueue_scripts', array($this, 'add_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'remove_scripts'), 20);
         add_action('wp_enqueue_scripts', array($this, 'move_scripts'), 30);
+
+        add_filter('wpcf7_autop_or_not', '__return_false');
+        add_filter('wpcf7_load_css', '__return_false');
     }
 
     public function add_scripts()
