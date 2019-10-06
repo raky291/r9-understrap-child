@@ -19,8 +19,8 @@ class R9_Understrap
 
     public function add_scripts()
     {
-        $this->r9_enqueue_style('r9-understrap-styles', '/wwwroot/dist/css/child-theme.css');
-        $this->r9_enqueue_script('r9-understrap-main', '/wwwroot/dist/js/child-theme.js', array('jquery'));
+        $this->r9_enqueue_style('r9-understrap-styles', '/wwwroot/dist/css/main.css');
+        $this->r9_enqueue_script('r9-understrap-scripts', '/wwwroot/dist/js/main.js', array('jquery'));
     }
 
     public function remove_scripts()
