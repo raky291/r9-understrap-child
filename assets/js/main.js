@@ -1,6 +1,6 @@
 import '../scss/main.scss';
 
-import 'bootstrap';
+import './vendors/bootstrap';
 
 import './base/skip-link-focus-fix';
 import './base/webfontloader';

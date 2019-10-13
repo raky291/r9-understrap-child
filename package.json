@@ -5,7 +5,8 @@
   "scripts": {
     "debug": "webpack --config webpack.dev.js --progress",
     "release": "webpack --config webpack.prod.js --progress",
-    "watch": "webpack --config webpack.dev.js --watch --progress"
+    "watch": "webpack --config webpack.dev.js --progress --watch",
+    "stats": "webpack --config webpack.prod.js --progress --profile --json > stats.json"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
