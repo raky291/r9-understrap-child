@@ -6,7 +6,8 @@ module.exports = {
     entry: './assets/js/main.js',
     output: {
         filename: 'js/[name].js',
-        path: path.resolve(__dirname, 'wwwroot/dist')
+        path: path.resolve(__dirname, 'wwwroot/dist'),
+        publicPath: 'wwwroot/dist/'
     },
     module: {
         rules: [
@@ -18,7 +19,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    { loader: MiniCssExtractPlugin.loader },
+                    { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
                     { loader: 'css-loader', options: { sourceMap: true } },
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'sass-loader', options: { sourceMap: true } }
@@ -27,7 +28,7 @@ module.exports = {
             {
                 test: /\.(eot|svg|ttf|woff2?)$/,
                 loader: 'file-loader',
-                options: { name: 'fonts/[name].[ext]', publicPath: '../' }
+                options: { name: 'fonts/[name].[ext]' }
             }
         ]
     },
