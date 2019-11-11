@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const sassOptions = require('./.sassrc.js');
 
 module.exports = {
-    entry: './assets/js/main.js',
+    entry: './client/main.js',
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'wwwroot/dist'),
@@ -22,7 +24,7 @@ module.exports = {
                     { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
                     { loader: 'css-loader', options: { sourceMap: true } },
                     { loader: 'postcss-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
+                    { loader: 'sass-loader', options: { sourceMap: true, sassOptions } }
                 ]
             },
             {
@@ -33,6 +35,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css'
@@ -40,5 +43,8 @@ module.exports = {
     ],
     externals: {
         jquery: 'jQuery'
+    },
+    stats: {
+        children: false
     }
 };
