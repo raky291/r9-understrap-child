@@ -12,9 +12,6 @@ class R9_Understrap
         add_action('wp_enqueue_scripts', array($this, 'add_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'remove_scripts'), 20);
         add_action('wp_enqueue_scripts', array($this, 'move_scripts'), 30);
-
-        add_filter('wpcf7_autop_or_not', '__return_false');
-        add_filter('wpcf7_load_css', '__return_false');
     }
 
     public function add_scripts()
@@ -26,9 +23,7 @@ class R9_Understrap
     public function remove_scripts()
     {
         wp_dequeue_style('understrap-styles');
-        wp_deregister_style('understrap-styles');
         wp_dequeue_script('understrap-scripts');
-        wp_deregister_script('understrap-scripts');
     }
 
     public function move_scripts()
