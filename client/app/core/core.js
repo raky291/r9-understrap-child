@@ -1,4 +1,5 @@
-import('./fontawesome.scss');
-import './bootstrap';
+import 'bootstrap';
 import './skip-link-focus-fix';
 import './webfontloader';
+
+import('./fontawesome.scss');
