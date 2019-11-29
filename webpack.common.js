@@ -8,8 +8,7 @@ module.exports = {
     entry: './client/main.js',
     output: {
         filename: 'js/[name].js',
-        path: path.resolve(__dirname, 'wwwroot/dist'),
-        publicPath: 'wwwroot/dist/'
+        path: path.resolve(__dirname, 'wwwroot/dist')
     },
     module: {
         rules: [

@@ -1,4 +1,5 @@
 import './core/core';
 import './layout/layout';
+import route from './util/router';
 
-import('./home/home');
+route('.home', () => import('./home/home'));
