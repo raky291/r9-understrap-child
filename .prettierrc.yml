@@ -1,5 +1,3 @@
-# https://prettier.io/
----
 printWidth: 120
 singleQuote: true
 quoteProps: consistent

@@ -7,7 +7,7 @@ describe('router', () => {
         const callback = jest.fn();
 
         // act
-        route('.home', callback);
+        route('.home', () => callback());
 
         // assert
         expect(callback).toHaveBeenCalled();
@@ -19,7 +19,7 @@ describe('router', () => {
         const callback = jest.fn();
 
         // act
-        route('.about', callback);
+        route('.about', () => callback());
 
         // assert
         expect(callback).not.toHaveBeenCalled();
