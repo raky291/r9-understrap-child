@@ -17,6 +17,3 @@ rules:
         - first-nested
       ignore:
         - after-comment
-  scss/dollar-variable-default:
-    - true
-    - ignore: local

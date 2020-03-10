@@ -1,2 +1,1 @@
-import './header.scss';
-import './footer.scss';
+import './layout.scss';
