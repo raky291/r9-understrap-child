@@ -1,4 +1,4 @@
-name: tests
+name: Tests
 on:
   push:
     branches:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: setup node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
