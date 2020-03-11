@@ -1,15 +1,4 @@
-# Visual Studio Code
 .vscode/
-
-# JetBrains
 .idea/
-
-# Node
 node_modules/
-package-lock.json
-
-# Webpack
-stats.json
-
-# Distribution directory
-wwwroot/dist/
+dist/
