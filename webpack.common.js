@@ -8,14 +8,14 @@ module.exports = {
     entry: './client/main.js',
     output: {
         filename: 'js/[name].js',
-        path: path.resolve(__dirname, 'wwwroot/dist')
+        path: path.resolve(__dirname, 'wwwroot/dist'),
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
             },
             {
                 test: /\.scss$/,
@@ -23,27 +23,27 @@ module.exports = {
                     { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
                     { loader: 'css-loader', options: { sourceMap: true } },
                     { loader: 'postcss-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true, sassOptions } }
-                ]
+                    { loader: 'sass-loader', options: { sourceMap: true, sassOptions } },
+                ],
             },
             {
                 test: /\.(eot|svg|ttf|woff2?)$/,
                 loader: 'file-loader',
-                options: { name: 'fonts/[name].[ext]' }
-            }
-        ]
+                options: { name: 'fonts/[name].[ext]' },
+            },
+        ],
     },
     plugins: [
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css'
-        })
+            filename: 'css/[name].css',
+        }),
     ],
     externals: {
-        jquery: 'jQuery'
+        jquery: 'jQuery',
     },
     stats: {
-        children: false
-    }
+        children: false,
+    },
 };

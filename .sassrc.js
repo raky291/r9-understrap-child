@@ -1,3 +1,3 @@
 module.exports = {
-    includePaths: ['./client/styles']
+    includePaths: ['./client/styles'],
 };

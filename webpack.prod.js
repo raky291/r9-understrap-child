@@ -12,13 +12,13 @@ module.exports = merge(common, {
                 extractComments: false,
                 parallel: true,
                 sourceMap: false,
-                terserOptions: { output: { comments: false } }
+                terserOptions: { output: { comments: false } },
             }),
             new OptimizeCssAssetsPlugin({
                 cssProcessorPluginOptions: {
-                    preset: ['default', { discardComments: { removeAll: true } }]
-                }
-            })
-        ]
-    }
+                    preset: ['default', { discardComments: { removeAll: true } }],
+                },
+            }),
+        ],
+    },
 });
