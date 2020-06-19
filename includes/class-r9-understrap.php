@@ -17,17 +17,15 @@ class R9_Understrap
 
     public function add_scripts()
     {
-        $this->r9_enqueue_style('r9-understrap-styles', '/wwwroot/dist/css/main.css');
-        $this->r9_enqueue_script('r9-understrap-scripts', '/wwwroot/dist/js/main.js', array('jquery'));
+        $this->enqueue_style('r9-understrap-styles', '/wwwroot/dist/css/main.css');
+        $this->enqueue_script('r9-understrap-scripts', '/wwwroot/dist/js/main.js', array('jquery'));
     }
 
     public function add_inline_scripts()
     {
-        $wordpress_public_path = __R9_UNDERSTRAP_URL__ . '/wwwroot/dist/';
-
         wp_add_inline_script(
             'r9-understrap-scripts',
-            sprintf("window.wordpress_public_path = '%s';", $wordpress_public_path),
+            sprintf("window.wordpress_public_path = '%s';", __R9_UNDERSTRAP_URL__ . '/wwwroot/dist/'),
             'before'
         );
     }
@@ -45,17 +43,17 @@ class R9_Understrap
         wp_script_add_data('jquery-migrate', 'group', 1);
     }
 
-    private function r9_enqueue_style($handle, $src)
+    private function enqueue_style($handle, $src, $deps = array())
     {
         wp_enqueue_style(
             $handle,
             __R9_UNDERSTRAP_URL__ . $src,
-            array(),
+            $deps,
             filemtime(__R9_UNDERSTRAP_DIR__ . $src)
         );
     }
 
-    private function r9_enqueue_script($handle, $src, $deps)
+    private function enqueue_script($handle, $src, $deps = array())
     {
         wp_enqueue_script(
             $handle,
